@@ -1,4 +1,5 @@
 "use client";
+import { useEditorStore } from '@/store/use-editor-store';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import TaskItem from '@tiptap/extension-task-item'
@@ -11,7 +12,13 @@ import Image from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
 
 export const Editor = () => {
+
+  const { setEditor } = useEditorStore();
+
   const editor = useEditor({
+    onCreate({ editor }) {
+      setEditor(editor);
+    },
     editorProps: {
       attributes: {
         style: "padding-left: 56px; padding-right: 56px;",
